@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import { useState } from "react";
+import Display from "./Display";
+import Array from "./Array";
 
-function App() {
+const arrayItems = ["apple", "orange", "banana", "mango", "pinapple"];
+
+export default function App() {
+  const [currState, setState] = useState(true);
+
+  const funcTest = () => {
+    setState(false);
+  };
+  const getData = () => {
+    setState((prevState) => {
+      return !prevState;
+    });
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {currState && <Display onCheck={funcTest} />}
+      {!currState && <button onClick={getData}>GETBOX</button>}
+      <Array items={arrayItems} />
     </div>
   );
 }
-
-export default App;
